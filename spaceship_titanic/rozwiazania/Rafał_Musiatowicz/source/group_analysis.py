@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv('Rekrutacja_2023/spaceship_titanic/dane.csv')
+data = pd.read_csv(r"spaceship_titanic\dane.csv")
 
 data["Group"] = data["PassengerId"].str.split('_').str[0]
 data["Surname"] = data["Name"].str.split(' ').str[1]
@@ -34,7 +34,8 @@ while i<8693:
             same_dst_count += 1
     i += j
 
-print(multi_group_count)
-print(multi_group_family_count)
-print(same_src_count)
-print(same_dst_count)
+print()
+print("Ilość grup wieloosobowych:", multi_group_count)
+print("Ilość grup wieloosobowych wyłącznie z członkami jednej rodziny:", multi_group_family_count)
+print("Ilość grup wieloosobowych, gdzie wszyscy członkowie grupy startują z tej samej planety:", same_src_count)
+print("Ilość grup wieloosobowych, gdzie członkowie grupy startują z innych planet:",same_dst_count)

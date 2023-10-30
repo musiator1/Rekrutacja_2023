@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv('Rekrutacja_2023/spaceship_titanic/dane.csv')
+data = pd.read_csv(r"spaceship_titanic\dane.csv")
 
 vip = data[data["VIP"] == True]
 not_vip = data[data["VIP"] == False]
@@ -12,8 +12,11 @@ columns_of_interest = ["RoomService", "FoodCourt", "ShoppingMall", "Spa", "VRDec
 
 avg_vip = vip[columns_of_interest].mean()
 avg_not_vip = not_vip[columns_of_interest].mean()
-print(avg_vip)
-print(avg_not_vip)
+print()
+print("Medium money spent by VIP:")
+print(avg_vip, "\n")
+print("Medium money spent by not VIP:")
+print(avg_not_vip, "\n")
 
 sum_vip1 = vip[columns_of_interest].sum(axis=1)
 sum_not_vip1 = not_vip[columns_of_interest].sum(axis=1)
@@ -21,17 +24,16 @@ sum_not_vip1 = not_vip[columns_of_interest].sum(axis=1)
 avg_sum_vip1 = sum_vip1.mean()
 avg_sum_not_vip1 = sum_not_vip1.mean()
 
-print()
-print(avg_sum_vip1)
-print(avg_sum_not_vip1)
+print("Sum of average expeses VIP: ", avg_sum_vip1)
+print("Sum of average expeses not VIP: ",avg_sum_not_vip1, "\n")
 
-print("VIP sleep: ", len( (data[ (data["VIP"] == True) & (data["CryoSleep"] == True) ]) ))
-print("VIP not sleep: ", len( (data[ (data["VIP"] == True) & (data["CryoSleep"] == False) ]) ))
-print("not VIP sleep: ", len( (data[ (data["VIP"] == False) & (data["CryoSleep"] == True) ]) ))
-print("not VIP not sleep: ", len( (data[ (data["VIP"] == False) & (data["CryoSleep"] == False) ]) ))
+print("Amount of VIP in cryosleep: ", len( (data[ (data["VIP"] == True) & (data["CryoSleep"] == True) ]) ))
+print("Amount of not VIP in cryosleep: ", len( (data[ (data["VIP"] == True) & (data["CryoSleep"] == False) ]) ))
+print("Amount of awaken VIPs: ", len( (data[ (data["VIP"] == False) & (data["CryoSleep"] == True) ]) ))
+print("Amount of awaken not VIPs: ", len( (data[ (data["VIP"] == False) & (data["CryoSleep"] == False) ]) ))
 
-print("Precentage of VIP sleeping: ", 21/175)
-print("Precentage of not VIP sleeping: ", 2941/5143)
+print("Precentage of VIP sleeping: ", str(21/175*100) + "%")
+print("Precentage of not VIP sleeping: ", str(2941/5143*100) + "%")
 
 print()
 print("Relationship between age and VIP:")
@@ -40,10 +42,3 @@ sum = 0
 for i in range (0, 80, step):
     age_filter = (vip["Age"] >= i) & (vip["Age"] < i+step)
     print("<" + str(i) + "," + str(i+step-1) + ">", len(vip[age_filter]) )
-
-
-homePlanets = data["HomePlanet"].unique()
-homePlanets_vip_count = data[data["VIP"] == True].groupby("HomePlanet")["VIP"].count()
-
-print("Home Planets:", homePlanets)
-print(homePlanets_vip_count)
